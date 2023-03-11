@@ -58,7 +58,8 @@ $("form").submit(
     e.preventDefault();
     var isbn = $('#ISBN').val();
     var isbn_without_hyphens = isbn.replace(/-/g, "");
-    var googleAPI = "https://www.googleapis.com/books/v1/volumes?maxResults=40&q=" + isbn_without_hyphens;
+    //var googleAPI = "https://www.googleapis.com/books/v1/volumes?maxResults=40&q=" + isbn_without_hyphens;
+    var googleAPI = "https://api2.isbndb.com/book/";
     $.getJSON(googleAPI, function(response)
     {
         if (typeof response.items === "undefined")
@@ -83,24 +84,44 @@ $("form").submit(
 
             $('#thetable tr').not(':first').remove();
             var html = '';
-            for(var i = 0; i < response.items.length; i++)
+	   	let book = response.book;
+		let thumbnail = book['image'];
+		let isbn10 = book['isbn'];
+		let isbn13 = book['isbn13'];
+		let title = book['title_long'];
+		let authors = book['authors']?.[0];
+		let publishedDate = book['date_published'];
+		
+		html += '<tr>'
+                    +'<td>' + '<img src="'+ thumbnail +'">' + '</td>'
+                    +'<td>' + isbn10 + '</td>'
+                    +'<td>' + isbn13 + '</td>'
+					+'<td>' + title + '</td>'
+					+'<td>' + authors + '</td>'				
+					+'<td>' + publishedDate + '</td>'
+					+'</tr>';
+		
+		
+		
+            //for(var i = 0; i < response.items.length; i++)
+	    for(var i = 0; i < 0; i++)
             {
-					let book = response.items[i];
+		//let book = response.items[i];
 
-                    //let isbn10 = book['volumeInfo']??['industryIdentifiers']??[0]??['identifier'];
-                    //let isbn13 = book['volumeInfo']??['industryIdentifiers']??[1]??['identifier'];
-                    let isbn10 = book['volumeInfo']['industryIdentifiers'][0]['identifier'];
-                    //let isbn13 = book['volumeInfo']['industryIdentifiers'][1]['identifier'];
-					let title = book['volumeInfo']['title'];
-					//let subtitle = book['volumeInfo']['subtitle'];
-					let authors = book['volumeInfo']['authors'];
-					//let printType = book['volumeInfo']['printType'];
-					//let pageCount = book['volumeInfo']['pageCount'];
-					//let publisher = book['volumeInfo']['publisher'];
-					let publishedDate = book['volumeInfo']['publishedDate'];
-					//let webReaderLink = book['accessInfo']['webReaderLink'];
-                    //let thumbnail = book['volumeInfo']['imageLinks'] && book['volumeInfo']['imageLinks']['smallThumbnail'];
-					let thumbnail = book['volumeInfo']?.['imageLinks']?.['smallThumbnail'] ?? 'not available';
+                    ////let isbn10 = book['volumeInfo']??['industryIdentifiers']??[0]??['identifier'];
+                    ////let isbn13 = book['volumeInfo']??['industryIdentifiers']??[1]??['identifier'];
+                    //let isbn10 = book['volumeInfo']['industryIdentifiers'][0]['identifier'];
+                    ////let isbn13 = book['volumeInfo']['industryIdentifiers'][1]['identifier'];
+		    //let title = book['volumeInfo']['title'];
+		    ////let subtitle = book['volumeInfo']['subtitle'];
+		    //let authors = book['volumeInfo']['authors'];
+					////let printType = book['volumeInfo']['printType'];
+					////let pageCount = book['volumeInfo']['pageCount'];
+					////let publisher = book['volumeInfo']['publisher'];
+					//let publishedDate = book['volumeInfo']['publishedDate'];
+					////let webReaderLink = book['accessInfo']['webReaderLink'];
+                    ////let thumbnail = book['volumeInfo']['imageLinks'] && book['volumeInfo']['imageLinks']['smallThumbnail'];
+					//let thumbnail = book['volumeInfo']?.['imageLinks']?.['smallThumbnail'] ?? 'not available';
 					
 					
 					html += '<tr>'
