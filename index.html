@@ -68,7 +68,8 @@ $("form").submit(
 	});	  
     $.getJSON(googleAPI, function(response)
     {
-        if (typeof response.items === "undefined")
+        //if (typeof response.items === "undefined")
+        if (typeof response.book === "undefined")
         {
             alert("No books match that ISBN.")
         } 
