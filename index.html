@@ -60,6 +60,12 @@ $("form").submit(
     var isbn_without_hyphens = isbn.replace(/-/g, "");
     //var googleAPI = "https://www.googleapis.com/books/v1/volumes?maxResults=40&q=" + isbn_without_hyphens;
     var googleAPI = "https://api2.isbndb.com/book/" + isbn_without_hyphens;
+	  
+    $.ajaxSetup({
+  	headers : {   
+    		'Authorization' : '49433_cde839796345cf1ab75c2cfda912b506'
+  	}
+	});	  
     $.getJSON(googleAPI, function(response)
     {
         if (typeof response.items === "undefined")
