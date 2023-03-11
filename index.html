@@ -44,8 +44,8 @@ Title: <span id="title"></span>
     <tr>
          <th>THUMBNAIL</th>
         <th>ISBN_10</th>
-        <!-- <th>ISBN_13</th> -->
-		<th>Title</th>
+        <th>ISBN_13</th>
+	<th>Title</th>
         <th>Author</th>
         <th>Publication date</th>
     </tr>
@@ -92,6 +92,7 @@ $("form").submit(
             $('#thetable tr').not(':first').remove();
             var html = '';
 	   	let book = response.book;
+		
 		let thumbnail = book['image'];
 		let isbn10 = book['isbn'];
 		let isbn13 = book['isbn13'];
@@ -100,13 +101,13 @@ $("form").submit(
 		let publishedDate = book['date_published'];
 		
 		html += '<tr>'
-                    +'<td>' + '<img src="'+ thumbnail +'">' + '</td>'
-                    +'<td>' + isbn10 + '</td>'
-                    +'<td>' + isbn13 + '</td>'
-					+'<td>' + title + '</td>'
-					+'<td>' + authors + '</td>'				
-					+'<td>' + publishedDate + '</td>'
-					+'</tr>';
+                    	+'<td>' + '<img src="'+ thumbnail +'">' + '</td>'
+                    	+'<td>' + isbn10 + '</td>'
+                    	+'<td>' + isbn13 + '</td>'
+			+'<td>' + title + '</td>'
+			+'<td>' + authors + '</td>'				
+			+'<td>' + publishedDate + '</td>'
+			+'</tr>';
 		
 		
 		
