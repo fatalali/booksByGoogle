@@ -59,7 +59,7 @@ $("form").submit(
     var isbn = $('#ISBN').val();
     var isbn_without_hyphens = isbn.replace(/-/g, "");
     //var googleAPI = "https://www.googleapis.com/books/v1/volumes?maxResults=40&q=" + isbn_without_hyphens;
-    var googleAPI = "https://api2.isbndb.com/book/";
+    var googleAPI = "https://api2.isbndb.com/book/" + isbn_without_hyphens;
     $.getJSON(googleAPI, function(response)
     {
         if (typeof response.items === "undefined")
